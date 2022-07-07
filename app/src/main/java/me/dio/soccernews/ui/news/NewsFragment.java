@@ -1,4 +1,4 @@
-package me.dio.soccernews.ui.notifications;
+package me.dio.soccernews.ui.news;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,22 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import me.dio.soccernews.databinding.FragmentNotificationsBinding;
+import me.dio.soccernews.databinding.FragmentNewsBinding;
 
-public class NotificationsFragment extends Fragment {
+public class NewsFragment extends Fragment {
 
-    private FragmentNotificationsBinding binding;
+    private FragmentNewsBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        NotificationsViewModel notificationsViewModel =
-                new ViewModelProvider(this).get(NotificationsViewModel.class);
+        NewsViewModel newsViewModel =
+                new ViewModelProvider(this).get(NewsViewModel.class);
 
-        binding = FragmentNotificationsBinding.inflate(inflater, container, false);
+        binding = FragmentNewsBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textNotifications;
-        notificationsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        final TextView textView = binding.textNews;
+        newsViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 
