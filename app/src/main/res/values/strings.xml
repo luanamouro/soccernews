@@ -3,4 +3,8 @@
     <string name="title_news">News</string>
     <string name="title_favorites">Favorites</string>
     <string name="title_notifications">Notifications</string>
+    <string name="txt_Open_Link">Open Link</string>
+    <string name="cd_soccer_news">Soccer News</string>
+    <string name="iv_favorite">Image Favorite</string>
+    <string name="bt_open_link">Open_Link</string>
 </resources>
