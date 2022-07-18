@@ -4,6 +4,11 @@ public class News {
     private string NewsTitle;
     private string News;
 
+    public News(String newsTitle, String news) {
+        NewsTitle = newsTitle;
+        News = news;
+    }
+
     public string getNewsTitle() {
         return NewsTitle;
     }
