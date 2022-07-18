@@ -11,17 +11,21 @@ import me.dio.soccernews.domain.News;
 
 public class NewsViewModel extends ViewModel {
 
-    private final MutableLiveData <List<News>> News;
+    private final MutableLiveData <List<News>> news;
 
     public NewsViewModel() {
-        this.News = new MutableLiveData<>();
+        this.news = new MutableLiveData<>();
+
+        // TODO: remover mock de notícias.
         List<News> news = new ArrayList<>();
-        news.add(new News("Ferroviária tem Desfalque Importante.",""));
-        news.add(new News("Ferroviária joga Sábado",""));
-        news.add(new News("Copa do Mundo Feminina está terminando.",""));
+        news.add(new News("Ferroviária tem Desfalque Importante.","Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."));
+        news.add(new News("Ferroviária joga Sábado","Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."));
+        news.add(new News("Copa do Mundo Feminina está terminando.","Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit..."));
+
+        this.news.setValue(news);
     }
 
     public LiveData<List<News>> getNews() {
-        return News;
+        return this.news;
     }
 }
