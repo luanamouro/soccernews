@@ -78,7 +78,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/bt_OpenLink"
             app:srcCompat="@drawable/ic_share"
-            android:contentDescription="@string/bt_open_link"/>
+            android:contentDescription="Favorite Image"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

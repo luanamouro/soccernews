@@ -1,27 +1,40 @@
 package me.dio.soccernews.domain;
 
 public class News {
-    private string NewsTitle;
-    private string News;
-
-    public News(String newsTitle, String news) {
-        NewsTitle = newsTitle;
-        News = news;
-    }
+    private string newsTitle;
+    private string news;
+    private string image;
+    private string link;
 
     public string getNewsTitle() {
-        return NewsTitle;
+        return newsTitle;
     }
 
     public void setNewsTitle(string newsTitle) {
-        NewsTitle = newsTitle;
+        this.newsTitle = newsTitle;
     }
 
     public string getNews() {
-        return News;
+        return news;
     }
 
     public void setNews(string news) {
-        News = news;
+        this.news = news;
+    }
+
+    public string getImage() {
+        return image;
+    }
+
+    public void setImage(string image) {
+        this.image = image;
+    }
+
+    public string getLink() {
+        return link;
+    }
+
+    public void setLink(string link) {
+        this.link = link;
     }
 }
