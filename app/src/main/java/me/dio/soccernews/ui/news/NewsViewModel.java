@@ -7,14 +7,23 @@ import androidx.lifecycle.ViewModel;
 import java.util.ArrayList;
 import java.util.List;
 
+import me.dio.soccernews.data.remote.SoccerNewsApi;
 import me.dio.soccernews.domain.News;
+import retrofit2.Retrofit;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NewsViewModel extends ViewModel {
 
     private final MutableLiveData <List<News>> news = new MutableLiveData<>();
+    private final SoccerNewsApi api;
 
     public NewsViewModel() {
+        Retrofit retrofit = new Retrofit.Builder()
+                .baseUrl("https://luanamouro.github.io/soccernews_api/")
+                .addConverterFactory(GsonConverterFactory.create())
+                .build();
 
+        api = retrofit.create(SoccerNewsApi.class);
     }
 
     public LiveData<List<News>> getNews() {
