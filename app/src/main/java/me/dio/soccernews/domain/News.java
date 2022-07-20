@@ -30,7 +30,7 @@ public class News {
         this.image = image;
     }
 
-    public string getLink() {
+    public String getLink() {
         return link;
     }
 
