@@ -1,5 +1,7 @@
 package me.dio.soccernews.domain;
 
+import android.net.Uri;
+
 public class News {
     private string newsTitle;
     private string news;
@@ -22,7 +24,7 @@ public class News {
         this.news = news;
     }
 
-    public string getImage() {
+    public Uri getImage() {
         return image;
     }
 

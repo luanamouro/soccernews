@@ -42,12 +42,18 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
                 .fit()
                 .into(holder.binding.im_soccerNews);
         holder.binding.bt_OpenLink.setOnClickListener(view->{
-            String url = "http://www.example.com";
             Intent i = new Intent(Intent.ACTION_VIEW);
             i.setData(Uri.parse(news.getLink()));
             holder.itemView.getContext().startActivity(i);
         });
+        //Implemerntar funcionalidade Compartilhar.
+        holder.binding.iv_share.setOnClickListener(view ->{
+            Intent i = new Intent(Intent.ACTION_SEND);
+            i.setType("text/plain");
+            i.putExtra(Intent.EXTRA_TEXT,news.getLink());
+            holder.itemView.getContext().startActivity(Intent.createChooser(i, "Share"));
 
+        });
     }
 
     @Override
@@ -57,6 +63,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
 
     public static class viewHolder extends RecyclerView.ViewHolder {
 
+        private NewsItemBinding binding;
         private final NewsItemBinding.Binding;
 
         public void ViewHolder (NewsItemBinding binding){
@@ -70,6 +77,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        public Object binding;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
         }

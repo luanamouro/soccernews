@@ -22,7 +22,7 @@ public class NewsViewModel extends ViewModel {
 
     public NewsViewModel() {
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://luanamouro.github.io/soccernews_api/")
+                .baseUrl("https://luanamouro.github.io/soccer-news-api/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
