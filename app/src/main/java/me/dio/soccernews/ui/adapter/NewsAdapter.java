@@ -20,9 +20,12 @@ import me.dio.soccernews.domain.News;
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
 
     private List<News> news;
+    private View.OnClickListener favoriteListener;
 
-    public NewsAdapter(List<News> news){
+    public NewsAdapter(List<News> news.View.OnClickListener.favoriteListener){
+
         this.news=news;
+        this.favoriteListener=favoriteListener;
     }
 
     @NonNull
@@ -36,24 +39,26 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
        News news = this.news.get(position);
-        holder.binding.tv_NewsTitle.setText(news.getNewsTitle());
-        holder.binding.tv_News.setText(news.getNews());
-        Picasso.get().load(news.getImage())
+        holder.binding.tv_NewsTitle.setText(news.newsTitle);
+        holder.binding.tv_News.setText(news.news);
+        Picasso.get().load(news.image)
                 .fit()
                 .into(holder.binding.im_soccerNews);
         holder.binding.bt_OpenLink.setOnClickListener(view->{
             Intent i = new Intent(Intent.ACTION_VIEW);
-            i.setData(Uri.parse(news.getLink()));
+            i.setData(Uri.parse(news.link));
             holder.itemView.getContext().startActivity(i);
         });
         //Implemerntar funcionalidade Compartilhar.
         holder.binding.iv_share.setOnClickListener(view ->{
             Intent i = new Intent(Intent.ACTION_SEND);
             i.setType("text/plain");
-            i.putExtra(Intent.EXTRA_TEXT,news.getLink());
+            i.putExtra(Intent.EXTRA_TEXT,news.link);
             holder.itemView.getContext().startActivity(Intent.createChooser(i, "Share"));
 
         });
+        //Implementar funcionalidade Favoritar.
+        holder.binding.iv_favorite.setOnClickListener(this.favoriteListener);
     }
 
     @Override
@@ -86,5 +91,12 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
         public ViewHolder(NewsItemBinding binding) {
             super(binding);
         }
+    }
+
+    private class News {
+        public int image;
+        public Object newsTitle;
+        public Object news;
+        public String link;
     }
 }

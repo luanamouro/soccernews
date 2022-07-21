@@ -30,7 +30,9 @@ public class NewsFragment extends Fragment {
 
        binding.rvNews.setLayoutManager(new LinearLayoutManager(getContext()));
         newsViewModel.getNews().observe(getViewLifecycleOwner(), news -> {
-            binding.rvNews.setAdapter(new NewsAdapter(news));
+            binding.rvNews.setAdapter(new NewsAdapter(news, view ->{
+
+            }));
 
         });
         return root;
