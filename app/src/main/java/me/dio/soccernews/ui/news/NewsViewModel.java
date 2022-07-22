@@ -1,8 +1,11 @@
 package me.dio.soccernews.ui.news;
 
+import android.app.Application;
+
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
+import androidx.room.Room;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,6 +23,7 @@ public class NewsViewModel extends ViewModel {
     private final MutableLiveData <List<News>> news = new MutableLiveData<>();
     private final SoccerNewsApi api;
 
+
     public NewsViewModel() {
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl("https://luanamouro.github.io/soccer-news-api/")
@@ -27,6 +31,7 @@ public class NewsViewModel extends ViewModel {
                 .build();
 
         api = retrofit.create(SoccerNewsApi.class);
+
         findNews();
     }
 
