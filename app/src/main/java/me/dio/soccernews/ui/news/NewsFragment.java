@@ -15,13 +15,14 @@ import androidx.room.Room;
 
 import java.util.Objects;
 
+import me.dio.soccernews.MainActivity;
 import me.dio.soccernews.databinding.FragmentNewsBinding;
 import me.dio.soccernews.ui.adapter.NewsAdapter;
 
 public class NewsFragment extends Fragment {
 
     private FragmentNewsBinding binding;
-    private AppDatabase db = Room.databaseBuilder(getContext(), AppDatabase.class, "soccer's_news").build();
+    private AppDatabase db;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -34,12 +35,12 @@ public class NewsFragment extends Fragment {
         binding.rvNews.setLayoutManager(new LinearLayoutManager(getContext()));
         newsViewModel.getNews().observe(getViewLifecycleOwner(), news -> {
             binding.rvNews.setAdapter(new NewsAdapter(news,upDatedNews ->{
-
+                MainActivity activity = (MainActivity) getActivity();
                 AsyncTask.execute(() ->{db.news_Dao().insert(upDatedNews);
                     }));
 
         });
-        return root;
+        return binding.getRoot();
     }
 
     private void build() {

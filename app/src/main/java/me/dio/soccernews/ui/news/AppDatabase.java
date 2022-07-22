@@ -1,6 +1,11 @@
 package me.dio.soccernews.ui.news;
 
+import java.util.List;
+
+import me.dio.soccernews.domain.News;
+
 public class AppDatabase {
-    public void news_Dao() {
+    public List<News> news_Dao() {
+        return null;
     }
 }
