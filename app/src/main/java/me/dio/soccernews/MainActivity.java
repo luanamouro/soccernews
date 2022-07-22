@@ -35,17 +35,6 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
 
-        setupLocaldb();
-    }
-
-    private void setupLocaldb() {
-        db = Room.databaseBuilder(this, AppDatabase.class, "soccer's_news")
-                .allowMainThreadQueries()
-                .build();
-    }
-
-    public AppDatabase getDb() {
-        return db;
     }
 
 }

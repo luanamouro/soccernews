@@ -13,6 +13,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.room.Room;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import java.util.Objects;
 
 import me.dio.soccernews.MainActivity;
@@ -34,14 +36,37 @@ public class NewsFragment extends Fragment {
 
         binding.rvNews.setLayoutManager(new LinearLayoutManager(getContext()));
         newsViewModel.getNews().observe(getViewLifecycleOwner(), news -> {
-            binding.rvNews.setAdapter(new NewsAdapter(news,upDatedNews ->{
-                MainActivity activity = (MainActivity) getActivity();
-                AsyncTask.execute(() ->{db.news_Dao().insert(upDatedNews);
-                    }));
+            binding.rvNews.setAdapter(new NewsAdapter(news,favoriteNews ->{
+               newsViewModel.saveNews(favoriteNews).observe(getViewLifecycleOwner(),unused-> { });
+            }));
 
-        });
-        return binding.getRoot();
-    }
+            });
+
+        newsViewModel.getState().observe(getViewLifecycleOwner(), state ->{
+            switch(state){
+                case DOING:
+                    binding.srlNews.setRefreshing(true);
+                    break;
+                case DONE:
+                    binding.srlNews.setRefreshing(false);
+                    break;
+                case ERROR:
+                    binding.srlNews.setRefreshing(false);
+                    Snackbar.make(binding.srlNews,"Network Error", Snackbar.LENGTH_SHORT)
+                            .show();
+            }
+        }
+        }))
+    binding.srlNews.setOnRefreshListener() -> {
+        newsViewModel.getNews().observe(getViewLifecycleOwner(), news -> {
+            binding.rvNews.setAdapter(new NewsAdapter(news,newsViewModel::saveNews);
+            }
+        };
+    };
+
+
+
+
 
     private void build() {
     }

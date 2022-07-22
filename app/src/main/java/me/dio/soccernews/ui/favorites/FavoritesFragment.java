@@ -1,6 +1,7 @@
 package me.dio.soccernews.ui.favorites;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -29,28 +30,27 @@ public class FavoritesFragment extends Fragment {
 
         binding = FragmentFavoritesBinding.inflate(inflater, container, false);
 
-        MainActivity activity = (MainActivity) getActivity();
-
-        loadFavoriteNews(activity);
-
-        View root = binding.getRoot();
-
-        final TextView textView = binding.textFavorites;
-        favoritesViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
-        return binding.getRoot();
     }
 
-    private void loadFavoriteNews(MainActivity activity) {
-        if (activity != null){
-            List<News> favoriteNews = activity.getDb().news_Dao().loadFavoriteNews();
+    private void loadFavoriteNews(FavoritesViewModel favoritesViewModel) {
+        favoritesViewModel.loadFavoriteNews().observe(getViewLifecycleOwner(), localNews -> {
             binding.rvNews.setLayoutManager(new LinearLayoutManager(getContext()));
-            binding.rvNews.setAdapter(new NewsAdapter(news, upDatedNews ->{
-                activity.getDb().news_Dao().save(upDatedNews);
+            binding.rvNews.setAdapter(new NewsAdapter(localNews, updatedNews ->{
+                favoritesViewModel.saveNews(updatedNews);
                 loadFavoriteNews();
-        }));
+                });
+
+            }));
+
+        }
+
+    private void loadFavoriteNews() {
     }
 
     ;
+    });
+        return binding.getRoot();
+    }
 
     @Override
     public void onDestroyView() {
