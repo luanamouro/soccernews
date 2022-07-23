@@ -30,7 +30,7 @@ public class NewsViewModel extends ViewModel {
         this.findNews();
     }
 
-    private void findNews() {
+    public void findNews() {
         SoccerNewsRepository.getInstance().getRemoteApi().getNews().enqueue(new Callback<List<News>>()
         {
             @Override
@@ -58,5 +58,8 @@ public class NewsViewModel extends ViewModel {
 
     public LiveData<List<News>> getNews() {
         return this.news;
+    }
+
+    public LiveData<Object> getState() {
     }
 }
