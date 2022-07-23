@@ -8,24 +8,23 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="330dp">
 
         <ImageView
             android:id="@+id/im_soccerNews"
             android:layout_width="match_parent"
             android:layout_height="194dp"
+            android:contentDescription="@string/cd_soccer_news"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars"
-            android:contentDescription="@string/cd_soccer_news"/>
+            tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
             android:id="@+id/tvNewsTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             app:layout_constraintEnd_toEndOf="parent"
@@ -38,11 +37,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_NewsTitle"
+            app:layout_constraintTop_toBottomOf="@+id/tvNewsTitle"
             tools:text="Meninas do Ferroviária derrotam o Palmeiras, no último domingo." />
 
         <com.google.android.material.button.MaterialButton
@@ -63,22 +62,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
+            android:contentDescription="@string/iv_favorite"
             app:layout_constraintBottom_toBottomOf="@+id/bt_OpenLink"
             app:layout_constraintEnd_toStartOf="@+id/iv_Share"
             app:layout_constraintTop_toTopOf="@+id/bt_OpenLink"
-            app:srcCompat="@drawable/ic_favorite"
-            android:contentDescription="@string/iv_favorite"/>
+            app:srcCompat="@drawable/ic_favorite" />
 
         <ImageView
             android:id="@+id/iv_Share"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
+            android:contentDescription="Favorite Image"
             app:layout_constraintBottom_toBottomOf="@+id/bt_OpenLink"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/bt_OpenLink"
-            app:srcCompat="@drawable/ic_share"
-            android:contentDescription="Favorite Image"/>
+            app:srcCompat="@drawable/ic_share" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

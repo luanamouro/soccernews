@@ -12,11 +12,8 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.android.material.snackbar.Snackbar;
-
-import java.util.List;
-
+import me.dio.soccernews.R;
 import me.dio.soccernews.databinding.FragmentNewsBinding;
-import me.dio.soccernews.domain.News;
 import me.dio.soccernews.ui.adapter.NewsAdapter;
 
 public class NewsFragment extends Fragment {

@@ -12,12 +12,12 @@ import androidx.navigation.ui.NavigationUI;
 import androidx.room.Room;
 
 import me.dio.soccernews.databinding.ActivityMainBinding;
-import me.dio.soccernews.ui.news.AppDatabase;
+
 
 public class MainActivity extends AppCompatActivity {
 
     private ActivityMainBinding binding;
-    private AppDatabase db;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
