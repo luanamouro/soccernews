@@ -1,12 +1,15 @@
 package me.dio.soccernews.data.remote;
 
+import androidx.room.Room;
 import androidx.room.RoomDatabase;
 
 import me.dio.soccernews.App;
+import me.dio.soccernews.data.remote.local.SoccerNewsDb;
+import me.dio.soccernews.data.remote.SoccerNewsApi;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class SoccerNewsRepository<SoccerNewsDb> {
+public class SoccerNewsRepository {
 
     //Region Constrants
     private static final String REMOTE_API_URL="https://github.com/luanamouro/soccer-news-api";
@@ -28,17 +31,14 @@ public class SoccerNewsRepository<SoccerNewsDb> {
                 .build()
                 .create(SoccerNewsApi.class);
 
-        localDb = RoomDatabaseBuilder(App.getInstance(), SoccerNewsDb.class, LOCAL_DB_NAME).build();
+        localDb = Room.databaseBuilder(App.getInstance(), SoccerNewsDb.class, LOCAL_DB_NAME).build();
 
     }
 
     public static SoccerNewsRepository getInstance(){return LazyHolder.INSTANCE;}
+
     private static class LazyHolder {
         private static final SoccerNewsRepository INSTANCE = new SoccerNewsRepository();
-
-    }
-
-    private SoccerNewsDb RoomDatabaseBuilder(App instance) {
     }
 
 }

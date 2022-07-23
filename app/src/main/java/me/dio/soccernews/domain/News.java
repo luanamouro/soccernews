@@ -1,15 +1,16 @@
 package me.dio.soccernews.domain;
 
-import android.net.Uri;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 @Entity
 public class News {
     @PrimaryKey
     public int id;
-    public string newsTitle;
-    public string news;
-    public string image;
-    public string link;
+    public String newsTitle;
+    public String news;
+    public String image;
+    public String link;
     public boolean favorite;
-    public Object NewsTitle;
+
 }
