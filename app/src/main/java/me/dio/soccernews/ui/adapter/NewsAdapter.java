@@ -1,16 +1,15 @@
 package me.dio.soccernews.ui.adapter;
 
-import static androidx.core.app.NotificationCompat.getColor;
-
 import android.content.Context;
-import android.icu.text.Transliterator;
+import android.content.Intent;
 import android.net.Uri;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
-import androidx.databinding.tool.Binding;
+
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.squareup.picasso.Picasso;
@@ -19,14 +18,13 @@ import java.util.List;
 
 import me.dio.soccernews.R;
 import me.dio.soccernews.databinding.NewsItemBinding;
-import me.dio.soccernews.domain.News;
 
 public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
 
     private List<News> news;
-    private NewsListener favoriteListener;
+    private FavoriteListener favoriteListener;
 
-    public NewsAdapter(List<News> news,NewsListener.favoriteListener){
+    public NewsAdapter(List<News> news, FavoriteListener favoriteListener) {
 
         this.news=news;
         this.favoriteListener = favoriteListener;
@@ -47,8 +45,8 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Context context = holder.itemView.getContext();
         News news = this.news.get(position);
-        holder.binding.tv_NewsTitle.setText(news.newsTitle);
-        holder.binding.tv_News.setText(news.news);
+        holder.binding.tvNewsTitle.setText(news.newsTitle);
+        holder.binding.tvNews.setText(news.news);
         Picasso.get().load(news.image)
                 .fit()
                 .into(holder.binding.im_soccerNews);
@@ -62,7 +60,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
         holder.binding.iv_Share.setOnClickListener(view ->{
             Intent i = new Intent(Intent.ACTION_SEND);
             i.setType("text/plain");
-            i.putExtra(Intent.EXTRA_TEXT,news.link);
+            i.putExtra(Intent.EXTRA_TEXT, (Parcelable) news.link);
             context.startActivity(Intent.createChooser(i, "Share"));
 
         });
@@ -72,17 +70,10 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
             this.favoriteListener.onFavorite(news);
             notifyItemChanged(position);
         });
-        int favoriteColor;
-        if(news.favorite){
-            favoriteColor = R.color.favorite_active;
-
-        }else{
-            favoriteColor = R.color.favorite_inactive;
-        }
+        int favoriteColor = news.favorite ? R.color.favorite_active : R.color.favorite_inactive;
+        holder.binding.iv_Favorite.setColorFilter(context.getResources().getColor(favoriteColor));
     }
 
-    private Object getColor(int black) {
-    }
 
     @Override
     public int getItemCount() {
@@ -91,10 +82,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
 
     public static class viewHolder extends RecyclerView.ViewHolder {
 
-        private NewsItemBinding binding;
-        private final NewsItemBinding.Binding;
+        private NewsItemBinding binding = null;
 
-        public void ViewHolder (NewsItemBinding binding){
+        public viewHolder(NewsItemBinding binding){
             super(binding.getRoot());
             this.binding=binding;
         }
@@ -111,9 +101,7 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
             super(itemView);
         }
 
-        public ViewHolder(NewsItemBinding binding) {
-            super(binding);
-        }
+
     }
 
     private class News {
@@ -127,5 +115,9 @@ public class NewsAdapter extends RecyclerView.Adapter<NewsAdapter.ViewHolder>{
     public interface NewsListener{
         void onFavorite(NewsAdapter.News news);
 
+    }
+
+    public interface FavoriteListener {
+        void onFavorite(NewsAdapter.News news);
     }
 }

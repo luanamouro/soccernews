@@ -21,7 +21,7 @@
             android:contentDescription="@string/cd_soccer_news"/>
 
         <TextView
-            android:id="@+id/tv_NewsTitle"
+            android:id="@+id/tvNewsTitle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -34,7 +34,7 @@
             tools:text="Ferroviária vence Palmeiras." />
 
         <TextView
-            android:id="@+id/tv_News"
+            android:id="@+id/tvNews"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"

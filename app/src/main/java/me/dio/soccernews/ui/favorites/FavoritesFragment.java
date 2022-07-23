@@ -22,6 +22,7 @@ import me.dio.soccernews.ui.adapter.NewsAdapter;
 public class FavoritesFragment extends Fragment {
 
     private FragmentFavoritesBinding binding;
+    private FavoritesViewModel favoritesViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -30,34 +31,21 @@ public class FavoritesFragment extends Fragment {
 
         binding = FragmentFavoritesBinding.inflate(inflater, container, false);
 
+        loadFavoriteNews();
+
+        return binding.getRoot();
     }
 
-    private void loadFavoriteNews(FavoritesViewModel favoritesViewModel) {
+
+
+    private void loadFavoriteNews() {
         favoritesViewModel.loadFavoriteNews().observe(getViewLifecycleOwner(), localNews -> {
             binding.rvNews.setLayoutManager(new LinearLayoutManager(getContext()));
             binding.rvNews.setAdapter(new NewsAdapter(localNews, updatedNews ->{
                 favoritesViewModel.saveNews(updatedNews);
                 loadFavoriteNews();
-                });
-
-            }));
-
+                }));
+            });
         }
+    };
 
-    private void loadFavoriteNews() {
-    }
-
-    ;
-    });
-        return binding.getRoot();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        binding = null;
-    }
-}
-
-    private void loadFavoriteNews() {
-    }
